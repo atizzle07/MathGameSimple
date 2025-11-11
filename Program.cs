@@ -1,6 +1,7 @@
 ﻿Console.WriteLine("Welcome to the MathGame!\n");
 Console.Write("Please enter your name to get started: ");
 
+// ------------ Helper variable declarations ---------------------------------
 string? playerName = Console.ReadLine();
 Random rand = new();
 decimal playerScore = 0;
@@ -11,6 +12,7 @@ int num1;
 int num2;
 int expectedAnswer;
 
+//  ------------Set multiplier values for each game --------------------------
 decimal additionMultiplier = 1.0;
 decimal subtractionMultiplier = 1.1;
 decimal multiplyMultiplier = 1.5;
@@ -18,7 +20,7 @@ decimal divisionMultiplier = 1.75;
 
 Console.WriteLine();
 Console.WriteLine($"Thanks for playing {playerName}\n");
-//TODO - need to tell player how many points they need to get to win. 10 sounds reasonable...
+//TODO: need to tell player how many points they need to get to win. 10 sounds reasonable...
 
 do
 {
@@ -57,7 +59,7 @@ do
         case "exit":
             Console.WriteLine("Thanks for playing! Press enter to leave...");
             Console.ReadLine();
-            //TODO - add in summary of score and how close player was to winning
+            //TODO: add in summary of score and how close player was to winning
             break;
         default:
             Console.WriteLine("Invalid Entry. Please try again.");
@@ -91,23 +93,42 @@ do
 
     static void additionGame()
     {
+        input = null;
         expectedAnswer = num1 + num2;
-        Console.WriteLine($"What is {num1} + {num2}?");
+        
+        while (input == null)
+        {
+            Console.WriteLine($"What is {num1} + {num2}?");
+            input = Console.ReadLine();
+        }
+
+        if (input == expectedAnswer)
+        {
+            playerScore += updateScore(1, additionMultiplier);
+            Console.WriteLine($"Correct! Your score is now {playerScore} points");
+        }
+            
+        else
+        {
+            playerScore += updateScore(-1, additionMultiplier);
+            Console.WriteLine($"Sorry, that is incorrect. The answer is {expectedAnswer}. Your score is now {playerScore} points.");
+        }
+            
     }
 
     static void subtractionGame()
     {
-
+        //TODO: Add subtraction game logic
     }
 
     static void multiplyGame()
     {
-
+        //TODO: Add multiply game logic
     }
 
     static void divisionGame()
     {
-
+        //HACK: Add division game logic, including equation validity
     }
 
 
